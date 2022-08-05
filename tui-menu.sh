@@ -38,8 +38,8 @@ declare -xr UI_WIDGET_SELECT_TPL_SELECTED='\e[33m → %s \e[39m'
 declare -xr UI_WIDGET_SELECT_TPL_DEFAULT="   \e[37m%s %s\e[39m"
 declare -xr UI_WIDGET_MULTISELECT_TPL_SELECTED="\e[33m → %s %s\e[39m"
 declare -xr UI_WIDGET_MULTISELECT_TPL_DEFAULT="   \e[37m%s %s\e[39m"
-declare -xr UI_WIDGET_TPL_CHECKED="▣"
-declare -xr UI_WIDGET_TPL_UNCHECKED="□"
+declare -xr UI_WIDGET_TPL_CHECKED="[x]"
+declare -xr UI_WIDGET_TPL_UNCHECKED="[ ]"
 
 # We use env variable to pass results since no interactive output from subshells and we don't wanna go hacky!
 declare -xg UI_WIDGET_RC=-1
