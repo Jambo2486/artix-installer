@@ -10,7 +10,7 @@ Linux commands are usually case sensitive, so make sure that you copy the comman
     - Enter `gentoo`
     - Quickly enter `uk`
 2. Confirm internet connection:
-    - Run `ping 1.1.1.1` and stop with `Ctrl + C`.
+    - Run `ping 1.1.1.1` to ensure you have an internet connection and stop with `Ctrl + C`.
 3. Check if your system is using EFI:
     - Run `ls /sys/firmware/` if a folder called `efi` is listed then use `gpt` when partitioning your disk, if not then use `dos`.
 4. Partition your disk:
