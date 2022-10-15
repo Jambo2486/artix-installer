@@ -17,12 +17,12 @@ done
 # Install base system
 echo "Installing base system..."
 # whiptail --infobox "Installing base system and utilities..." $box_size
-basestrap /mnt base base-devel openrc elogind-openrc > /dev/null 2>&1
+basestrap /mnt base base-devel openrc elogind-openrc # > /dev/null 2>&1
 
 # Install Linux kernel
 echo "Installing linux kernel..."
 # whiptail --infobox "Installing Linux kernel..." $box_size
-basestrap /mnt linux linux-firmware > /dev/null 2>&1
+basestrap /mnt linux linux-firmware # > /dev/null 2>&1
 fstabgen -U /mnt >> /mnt/etc/fstab
 artix-chroot /mnt
 
