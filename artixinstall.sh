@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# TODO: partition section of readme needs updating to fit artix method
-
 # Check if root
 [ "$EUID" != 0 ] || echo "artix" | exec sudo "$0" "$@"
 
@@ -14,16 +12,6 @@ for i in $(stty size)
 do
 	box_size="$box_size $(($i/3*2))"
 done
-
-# Set keyboard layout
-whiptail --infobox "Setting keyboard layout..." $box_size
-loadkeys en
-sed -i -e "s/keymap=\".*\"/keymap=\"uk\"/g" /etc/conf.d/keymaps
-
-# Set locale
-whiptail --infobox "Setting language..." $box_size
-locale-gen
-echo -e "export LANG=\"en_UK.UTF-8\"\nexport LC_COLLATE=\"C\"" >> /etc/locale.conf
 
 # Install base system
 whiptail --infobox "Installing base system and utilities..." $box_size
@@ -49,6 +37,16 @@ else
 	grub-install --recheck /dev/sda
 fi
 grub-mkconfig -o /boot/grub/grub.cfg
+
+# Set keyboard layout
+whiptail --infobox "Setting keyboard layout..." $box_size
+loadkeys en
+sed -i -e "s/keymap=\".*\"/keymap=\"uk\"/g" /etc/conf.d/keymaps
+
+# Set locale
+whiptail --infobox "Setting language..." $box_size
+locale-gen
+echo -e "export LANG=\"en_UK.UTF-8\"\nexport LC_COLLATE=\"C\"" >> /etc/locale.conf
 
 inputpassword() {
 	# Prompt the user for a password

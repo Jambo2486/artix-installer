@@ -23,6 +23,7 @@
     - Run `mkswap -L SWAP /dev/sda2` then `swapon /dev/disk/by-label/SWAP` to  activate the swap partition.
     - Run `mkfs.ext4 -L ROOT /dev/sda3`. If this root partition is less than 8GB then run `mkfs.ext4 -T small -L ROOT /dev/sda3` instead.
     - Run `mount /dev/disk/by-label/ROOT /mnt` to mount the root partition.
-    - Run `mount /dev/disk/by-label/BOOT /mnt/boot` to mount to boot partition.
+    - Run `mkdir /mnt/boot` and `mount /dev/disk/by-label/BOOT /mnt/boot` to mount the boot partition.
 4. Download the install script:
-    - Run `curl github.com/Jambo2486/artix-installer/raw/main/install.sh > install.sh`
+    - Run `curl github.com/Jambo2486/artix-installer/raw/main/install.sh > install.sh` to download the Artix install script
+    - Run `install.sh` to run it.
