@@ -26,4 +26,4 @@
     - Run `mkdir /mnt/boot` and `mount /dev/disk/by-label/BOOT /mnt/boot` to mount the boot partition.
 4. Download the install script:
     - Run `curl github.com/Jambo2486/artix-installer/raw/main/install.sh > install.sh` to download the Artix install script
-    - Run `install.sh` to run it.
+    - Run `./install.sh` to run it.
