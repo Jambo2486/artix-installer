@@ -4,6 +4,7 @@
 [ "$EUID" != 0 ] || echo "artix" | exec sudo "$0" "$@"
 
 # Install whiptail
+echo "Installing whiptial..."
 pacman --noconfirm --needed -Sy libnewt
 
 # Set dialogue box size
@@ -14,21 +15,25 @@ do
 done
 
 # Install base system
-whiptail --infobox "Installing base system and utilities..." $box_size
+echo "Installing base system..."
+# whiptail --infobox "Installing base system and utilities..." $box_size
 basestrap /mnt base base-devel openrc elogind-openrc > /dev/null 2>&1
 
 # Install Linux kernel
-whiptail --infobox "Installing Linux kernel..." $box_size
+echo "Installing linux kernel..."
+# whiptail --infobox "Installing Linux kernel..." $box_size
 basestrap /mnt linux linux-firmware > /dev/null 2>&1
 fstabgen -U /mnt >> /mnt/etc/fstab
 artix-chroot /mnt
 
 # Set timezone
-whiptail --infobox "Setting timezone..." $box_size
+echo "Setting timezone..."
+# whiptail --infobox "Setting timezone..." $box_size
 ln -sf /usr/share/zoneinfo/Europe/London /etc/localtime
 hwclock --systohc
 
 # Install bootloader
+echo "Installing bootloader..."
 pacman -S grub os-prober efibootmgr
 if [ -d /sys/firmware/efi ]
 then
@@ -39,11 +44,13 @@ fi
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Set keyboard layout
+echo "Setting keyboard layout..."
 whiptail --infobox "Setting keyboard layout..." $box_size
 loadkeys en
 sed -i -e "s/keymap=\".*\"/keymap=\"uk\"/g" /etc/conf.d/keymaps
 
 # Set locale
+echo "Setting locale"
 whiptail --infobox "Setting language..." $box_size
 locale-gen
 echo -e "export LANG=\"en_UK.UTF-8\"\nexport LC_COLLATE=\"C\"" >> /etc/locale.conf
