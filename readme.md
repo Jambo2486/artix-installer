@@ -19,9 +19,10 @@
     - Create a `Linux root` partition with your remaining space (ensure you select the type corresponding with your CPU archatecture, most likely `x86-64`) and select `Write` to save the changes and then `Quit`.
     - Ensure that you complete the steps in order so that the rest of the guide is accurate, as it relies on sda1 being a boot partition, sda2 being swap, and sda3 being root.
 4. Creating file systems:
-    - If you are on an EFI system, run `mkfs.vfat -F 32 /dev/sda1`, if not then run `mkfs.ext4 -T small /dev/sda1`.
-    - Run `mkswap /dev/sda2` then `swapon /dev/sda2` to  activate the swap partition.
-    - Run `mkfs.ext4 /dev/sda3`. If this root partition is less than 8GB then run `mkfs.ext4 -T small /dev/sda3` instead.
-    - Finally run `mount /dev/sda3 /mnt/artix` to mount the root partition and `cd /mnt/artix` to navigate there.
+    - If you are on an EFI system, run `mkfs.vfat -F 32 /dev/sda1` and `fatlabel /dev/da1 BOOT`, if not then run `mkfs.ext4 -L BOOT /dev/sda1`.
+    - Run `mkswap -L SWAP /dev/sda2` then `swapon /dev/disk/by-label/SWAP` to  activate the swap partition.
+    - Run `mkfs.ext4 -L ROOT /dev/sda3`. If this root partition is less than 8GB then run `mkfs.ext4 -T small -L ROOT /dev/sda3` instead.
+    - Run `mount /dev/disk/by-label/ROOT /mnt` to mount the root partition.
+    - Run `mount /dev/disk/by-label/BOOT /mnt/boot` to mount to boot partition.
 4. Download the install script:
     - Run `curl github.com/Jambo2486/artix-installer/raw/main/install.sh > install.sh`
